@@ -1,0 +1,115 @@
+{{define "findUser"}}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://kit.fontawesome.com/a11c966e05.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Blog</title>
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/findUser.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap" rel="stylesheet">
+        <style>
+            .linkToUser{
+                text-decoration: none;
+                color: white;
+            }
+            .linkToUser:hover{
+                color: #DCE1F2;
+            }
+        </style>
+    </head>
+    <body id="body">
+        {{template "header1"}}
+        <div style="height: 100vh;margin-top: 56px;width: 100%;">
+            <div style="width: 100%;height: 100%;background-color: white;padding: 10px;">
+                <div style="display: flex;align-content: center">
+                    <input id="search1" name="search" placeholder="Search" autocomplete="off" style="max-height: 40px;">
+                </div>
+                <div style="width: 100%;display: flex;flex-direction: column">
+                    <div style="display: flex;flex-direction: column;width: 100%;margin-top: 10px;">
+                        <div style="display: flex;width: 100%;flex-direction: column;background-color: #666666;padding: 10px;border: 1px solid black;">
+                            <div style="display: flex;flex-direction: row;width: 100%;justify-content: space-between;">
+                                <ul class="navbar-nav" style="display: flex;flex-direction: row;align-items: center;">
+                                    <li class="nav-item" style="margin-right: 5px">
+                                        <div class="text-white">
+                                            username:
+                                            <a href="/user" class="linkToUser">username</a>
+                                        </div>
+                                    </li>
+                                    <li>|</li>
+                                    <li class="nav-item" style="margin: 0 5px;">
+                                        <div style="flex-direction: row;display: flex;">
+                                            Full name:
+                                            <div class="" style="margin-left: 5px;">fullName</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {{range .}}
+                    <div style="display: flex;flex-direction: column;width: 100%;margin-top: 10px;">
+                        <div style="display: flex;width: 100%;flex-direction: column;background-color: #666666;padding: 10px;border: 1px solid black;">
+                            <div style="display: flex;flex-direction: row;width: 100%;justify-content: space-between;">
+                                <ul class="navbar-nav" style="display: flex;flex-direction: row;align-items: center;">
+                                    <li class="nav-item" style="margin-right: 5px">
+                                        <div class="text-white">
+                                            username:
+                                            <a href="/user/{{.Username}}" class="linkToUser find1">{{.Username}}</a>
+                                        </div>
+                                    </li>
+                                    <li>|</li>
+                                    <li class="nav-item" style="margin: 0 5px;">
+                                        <div style="flex-direction: row;display: flex;">
+                                            Full name:
+                                            <div class="find1" style="margin-left: 5px;">{{.Firstname}} {{.Lastname}}</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {{end}}
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/resizeBody.js"></script>
+        <script type="text/javascript" src="js/findUser.js"></script>
+        <script>
+            document.querySelector('#search1').oninput = function (){
+                let val = this.value.trim();
+                let items = document.querySelectorAll(".find1");
+                let items2 = document.querySelectorAll(".find2");
+                if(val != ''){
+                    items.forEach(function (elem){
+                        if(elem.innerText.search(val) == -1){
+                            elem.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.style.order=10;
+                            elem.innerHTML=elem.innerText;
+                        }
+                        else{
+                            elem.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.style.order=1;
+                            let str = elem.innerText;
+                            elem.innerHTML=insertMark(str,elem.innerText.search(val),val.length);
+                        }
+                    });
+                }else{
+                    items.forEach(function (elem){
+                        elem.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.style.order=1;
+                        elem.innerHTML=elem.innerText;
+                    });
+                }
+            }
+            function insertMark(str,pos,len){
+                return str.slice(0,pos) + '<mark>' +str.slice(pos,pos+len) + '</mark>' + str.slice(pos+len);
+            }
+        </script>
+    </body>
+</html>
+{{end}}

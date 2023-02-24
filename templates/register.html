@@ -1,0 +1,128 @@
+{{define "register"}}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{template "links1"}}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Registration</title>
+        <link rel="stylesheet" href="css/register.css">
+        <style>
+            .input1{
+                border-radius: 5px;
+                padding: 0 20px;
+                font-size: 16px;
+                line-height: 30px;
+                border-color: #666;
+            }
+            .button1{
+                background: #4272d7;
+                border-radius: 5px;
+                line-height: 50px;
+                width: 100%;
+                cursor: pointer;
+                font-size: 18px;
+                color: white;
+                outline: none;
+                border: none;
+            }
+        </style>
+    </head>
+    <body style="margin: 0;">
+        <div style="margin: 0;min-height: 100vh;background: linear-gradient(to top right,red 0%,blue 100%);display: flex;">
+            <div style="width: 370px;margin: 50px auto;">
+                <div style="background: white;border-radius: 10px;">
+                    <div style="padding: 57px 65px;padding-bottom: 65px;">
+                        <h2 style="font-size: 24px;color: #525252;margin-bottom: 40px;width: 100%;" align="center">Registration Form</h2>
+                        <form method="POST" action="/user" id="form">
+                            <div class="row row-space">
+                                <div>
+                                    <div style="margin-bottom: 22px;">
+                                        <input class="input1" required id="firstName" type="text" name="firstName" placeholder="First name">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="margin-bottom: 22px;">
+                                        <input required class="input1" id="lastName" type="text" name="lastName" placeholder="Last name">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="margin-bottom: 22px;">
+                                        <input required class="input1" type="text" id="username" name="username" placeholder="Username">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="margin-bottom: 22px;">
+                                        <input required class="input1" type="password" id="password" name="password" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="margin-bottom: 22px;">
+                                        <input required class="input1" type="password" id="password2" name="password2" placeholder="Repeat password">
+                                    </div>
+                                </div>
+                                <script>
+                                    function checkInputs(){
+                                        let password = document.getElementById("password");
+                                        let passwordValue = password.value.trim();
+                                        let password2 = document.getElementById("password2");
+                                        let password2Value = password2.value.trim();
+                                        let span = document.getElementById("spanMessage1");
+                                        let button = document.getElementById("button1");
+                                        if (passwordValue != password2Value){
+                                            span.innerHTML = "Passwords must be the same"
+                                            button.setAttribute("disabled", "disabled");
+                                        } else{
+                                            span.innerHTML = ""
+                                            button.removeAttribute("disabled")
+                                        }
+                                    }
+                                    setInterval(checkInputs,1000)
+                                </script>
+                                <div>
+                                    <div style="margin-top: -22px;margin-bottom: 22px;">
+                                        <span id="spanMessage1" style="color: red;"></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="margin-bottom: 22px;">
+                                        <input required class="input1" type="email" id="email" name="email" placeholder="Email">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                {{.}}
+                            </div>
+
+                            <div style="padding-top: 15px;">
+                                <button id="button1" class="button1" type="submit">Sign up</button>
+                            </div>
+                            <div style="display: flex;flex-direction: column;align-items: center;padding-top: 15px;">
+                                <span style="font-size: 14px;/* line-height: 1.5px; */color: #666666;padding-bottom: 17px;height: 38px;">Have an account?</span>
+
+                                <a href="/login" style="font-size: 14px;/* line-height: 1.5px; */text-transform: uppercase;text-decoration: none;background-color: transparent;">Login</a>
+                            </div>
+<!--							<div style="display: flex;flex-direction: column;align-items: center;padding-top: 15px;">-->
+<!--								<span style="font-size: 14px;line-height: 1.5px;color: #666666;padding-bottom: 17px;">Have an account?</span>-->
+
+<!--								<a href="login" style="font-size: 14px;line-height: 1.5px;text-transform: uppercase;text-decoration: none;background-color: transparent;">Login</a>-->
+<!--							</div>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <script src="/js/register.js"></script>-->
+
+    <!--<script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/select2/select2.min.js"></script>
+        <script src="vendor/datepicker/moment.min.js"></script>
+        <script src="vendor/datepicker/daterangepicker.js"></script>
+
+        <script src="js/global.js"></script>
+     -->
+    </body>
+
+</html>
+{{end}}

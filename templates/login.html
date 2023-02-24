@@ -1,0 +1,73 @@
+{{define "login"}}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{{template "links1"}}
+		<title>Login</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			.input1{
+				font-size: 16px;
+				color: #333333;
+				line-height: 1.2;
+				display: block;
+				width: 100%;
+				height: 55px;
+				background: transparent;
+				padding: 0 7px 0 7px;
+				outline: none;
+				transition: all .5s ease;
+				/* border-radius: 55px; */
+			}
+			.input1:focus{
+				border-radius: 55px;
+			}
+			
+		</style>
+	</head>
+	<body style="height: 100%;margin: 0;">
+		<div style="width: 100%;margin: 0 auto;">
+			<div style="width: 100%;min-height: 100vh;display: flex;flex-wrap: wrap;justify-content: center;align-items: center;padding: 15px;background: linear-gradient(to top right,red 0%,blue 100%);">
+				<div style="width: 500px;background: white;border-radius: 10px;overflow: hidden;padding: 54px 55px;padding-top: 65px;">
+					<form method="post" action="/user/login" class="login100-form validate-form" style="width: 100%;display: block;">
+						<div style="min-width: 100%;justify-content: center;display: flex;">
+							<span style="font-size: 39px;color: #333333;min-width: 100%;line-height: 1.2;text-align: center;padding-bottom: 49px;">Login</span>
+						</div>
+
+						<div class="wrap-input100 validate-input m-b-23" style="width: 100%;margin-bottom: 23px;" data-validate = "Username is reauired">
+							<input class="input1" type="text" name="username" placeholder="Type your username">
+						</div>
+
+						<div class="wrap-input100 validate-input" data-validate="Password is required">
+							<input class="input1" type="password" name="password" placeholder="Type your password">
+						</div>
+						
+						<div style="padding-bottom: 31px;padding-top: 8px;text-align: right;">
+							<a href="#">
+								Forgot password?
+							</a>
+						</div>
+						<div>
+							{{.}}
+						</div>
+						<div style="display: flex;flex-wrap: wrap;justify-content: center;" id="pri1">
+							<div style="border-radius: 25px;margin: 0 auto;width: 100%;display: block;position: relative;z-index: 1;border-radius: 25px;margin: 0 auto;overflow: hidden;">
+								<div style="position: absolute;z-index: -1;width: 300%;height: 100%;background: linear-gradient(to right, #00dbde, #fc00ff, #00dbde, #fc00ff);left: -100%;transition: all 0.4s;top: 0;transition: all 0.4s;"></div>
+								<button style="font-size: 16px;color: white;line-height: 1.2;text-transform: uppercase;display: flex;justify-content: center;align-items: center;padding: 0 20px;width: 100%;height: 50px;outline: none;border: none;background: transparent;" type="submit">
+									Login
+								</button>
+							</div>
+						</div>
+						<div style="display: flex;flex-direction: column;align-items: center;padding-top: 15px;">
+							<span style="font-size: 14px;/* line-height: 1.5px; */color: #666666;padding-bottom: 17px;height: 38px;">Don't you have an account yet?</span>
+
+							<a href="/register" style="font-size: 14px;/* line-height: 1.5px; */text-transform: uppercase;text-decoration: none;background-color: transparent;">Sign Up</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+{{end}}
